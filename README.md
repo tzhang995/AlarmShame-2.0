@@ -1,2 +1,2 @@
 # AlarmShame-2.0
-Updated version of 
+Updated version of terriblehack idea
