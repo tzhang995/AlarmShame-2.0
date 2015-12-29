@@ -1,6 +1,8 @@
 package com.example.tony.alarmshame;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import java.text.DateFormat;
 import java.util.Calendar;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     static final int dialog_id = 0;
     int hour,minute;
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +59,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //create a time picker
     public void addTime(View view){
+        //shows the time picker
         showDialog(dialog_id);
+
+        //Starts the alarm
+
     }
     protected Dialog onCreateDialog(int id){
         switch(id) {
@@ -73,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
         public void onTimeSet(TimePicker view, int hourOfDay, int hour_minute) {
             hour = hourOfDay;
             minute = hour_minute;
-            Toast.makeText(getBaseContext(),"Alarm is set to " + hour+ ":" +minute, Toast.LENGTH_LONG).show();
+            //TODO language syntax
+            Toast.makeText(getBaseContext(),"Alarm is set to " + hour+ " hours and " +minute + " minutes",
+                    Toast.LENGTH_LONG).show();
         }
     };
 }
