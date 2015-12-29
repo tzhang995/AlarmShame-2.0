@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <AnalogClock
+        android:layout_width="168dp"
+        android:layout_height="172dp"
+        android:id="@+id/analogClock2"
+        android:layout_gravity="center_horizontal|top" />
+
+    <DigitalClock
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textClock"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Alarm"
+        android:id="@+id/Stop"
+        android:layout_gravity="center_vertical|right" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Snooze"
+        android:id="@+id/Snooze"
+        android:layout_gravity="left|center_vertical" />
+</FrameLayout>

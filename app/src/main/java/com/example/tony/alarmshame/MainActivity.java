@@ -61,9 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void addTime(View view){
         //shows the time picker
+        //create the alarm at TimePickerDialog
         showDialog(dialog_id);
-
-        //Starts the alarm
 
     }
     protected Dialog onCreateDialog(int id){
