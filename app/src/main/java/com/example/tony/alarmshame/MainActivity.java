@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     static final int dialog_id = 0;
     int hour,minute;
-    private PendingIntent pendingIntent;
+    private Button startButton;
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,38 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        startButton =(Button) findViewById(R.id.StartAlarm);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //shows the time picker
+                //create the alarm at TimePickerDialog
+                //showDialog(dialog_id);
+                int requestID = (int) System.currentTimeMillis();
+
+                //set i to time till alarm
+                int i = 10;
+                Intent intent = new Intent(MainActivity.this,AlarmRecieverActivity.class);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,requestID,
+                        intent,PendingIntent.FLAG_CANCEL_CURRENT);
+                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                //sets the alarm into an infinite loop
+                am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(i*1000),15*1000,pendingIntent);
+
+                if (mToast != null){
+                    mToast.cancel();
+                }
+
+                mToast = Toast.makeText(getApplicationContext(),
+                        "Alarm starts in " + i + " seconds", Toast.LENGTH_LONG);
+                mToast.show();
+            }
+        });
     }
 
     @Override
@@ -59,12 +93,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addTime(View view){
-        //shows the time picker
-        //create the alarm at TimePickerDialog
-        showDialog(dialog_id);
-
-    }
     protected Dialog onCreateDialog(int id){
         switch(id) {
             case dialog_id:
@@ -78,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
             hour = hourOfDay;
             minute = hour_minute;
             //TODO language syntax
-            Toast.makeText(getBaseContext(),"Alarm is set to " + hour+ " hours and " +minute + " minutes",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(),"Alarm is set to " + hour+ " hours and " +minute + " minutes",
+            //        Toast.LENGTH_LONG).show();
         }
     };
 }
