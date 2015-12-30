@@ -57,7 +57,10 @@ public class MainActivity extends AppCompatActivity {
                         intent,PendingIntent.FLAG_CANCEL_CURRENT);
                 AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
                 //sets the alarm into an infinite loop
-                am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(i*1000),15*1000,pendingIntent);
+                //use 15*1000 for testing
+                //use 10*60*1000 for release or make variable but that's later
+                am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(i*1000),
+                        15 * 1000,pendingIntent);
 
                 if (mToast != null){
                     mToast.cancel();
