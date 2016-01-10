@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/analogClock"
         android:layout_above="@+id/digitalClock"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="showTimePickerDialog" />
 
     <DigitalClock
         android:layout_width="wrap_content"
@@ -25,7 +26,8 @@
         android:id="@+id/digitalClock"
         android:textSize="50sp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="showTimePickerDialog" />
 
     <Button
         android:layout_width="wrap_content"

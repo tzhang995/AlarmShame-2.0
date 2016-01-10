@@ -1,7 +1,9 @@
 package com.example.tony.alarmshame;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -15,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AnalogClock;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         startButton =(Button) findViewById(R.id.StartAlarm);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,15 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
                 //shows the time picker
                 //create the alarm at TimePickerDialog
-                showDialog(dialog_id);
+                //showDialog(dialog_id);
                 int requestID = 1;
-
+                //showTimePickerDialog(v);
                 //set i to time till alarm
                 int i = 10;
 
                 Intent intent = new Intent(MainActivity.this,AlarmRecieverActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
 
                 PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,requestID,
                         intent,PendingIntent.FLAG_CANCEL_CURRENT);
@@ -99,13 +100,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected Dialog onCreateDialog(int id){
+    public Dialog onCreateDialog(int id){
         switch(id) {
             case dialog_id:
-                return new TimePickerDialog(this, mTimeSetListener, hour, minute, false);
+                //return new TimePickerDialog(this, mTimeSetListener, hour, minute, false);
         }
         return null;
     }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
+    }
+
     private TimePickerDialog.OnTimeSetListener mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int hour_minute) {
@@ -116,5 +123,11 @@ public class MainActivity extends AppCompatActivity {
             //        Toast.LENGTH_LONG).show();
         }
     };
+
+    public void setViewTime(int hour, int minute) {//},Activity act) {
+        //AnalogClock ac = new act.findViewById(R.id.analogClock);
+        //ac.set
+        Toast.makeText(getApplicationContext(), hour + " " + minute, Toast.LENGTH_SHORT).show();
+    }
 }
 

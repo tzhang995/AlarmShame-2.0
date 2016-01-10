@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/tony/AndroidStudioProjects/AlarmShame/app/build/intermediates/res/merged/debug/values-w820dp-v13/values-w820dp-v13.xml",
+        "outputFile": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13\\values-w820dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,37 @@
                     "endOffset": 108
                 },
                 "from": {
-                    "file": "/home/tony/AndroidStudioProjects/AlarmShame/app/src/main/res/values-w820dp/dimens.xml",
+                    "file": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\src\\main\\res\\values-w820dp\\dimens.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
                         "startOffset": 291,
                         "endColumn": 57,
                         "endOffset": 344
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "E:\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13\\values-w820dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 57,
+                    "endOffset": 108
+                },
+                "from": {
+                    "file": "E:\\android\\app\\src\\main\\res\\values-w820dp\\dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 295,
+                        "endColumn": 57,
+                        "endOffset": 348
                     }
                 }
             }
