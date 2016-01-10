@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.AlarmClock;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 //shows the time picker
                 //create the alarm at TimePickerDialog
                 //showDialog(dialog_id);
-                int requestID = (int) System.currentTimeMillis();
+                int requestID = 1;
 
                 //set i to time till alarm
                 int i = 10;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

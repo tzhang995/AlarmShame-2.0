@@ -61,18 +61,7 @@ public class AlarmRecieverActivity extends Activity{
             public void onClick(View v) {
                 //stops the music
                 mMediaPlayer.stop();
-
-                //stops the pending intent
-                Intent intent = new Intent(AlarmRecieverActivity.this,AlarmRecieverActivity.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmRecieverActivity.this,
-                        3, intent, 0);
-                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                am.cancel(pendingIntent);
-                PendingIntent.getBroadcast(AlarmRecieverActivity.this, 0, intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT).cancel();
-                Toast.makeText(getBaseContext(),"Alarm has been cancelled",
-                        Toast.LENGTH_LONG).show();
-
+                //takes the pendingintent and stops it
                 finish();
             }
         });
