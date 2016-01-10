@@ -54,15 +54,23 @@ public class AlarmRecieverActivity extends Activity{
             }
         });
 
-        Button stopAlarm = (Button) findViewById(R.id.Stop);
-        //Here is where the alarm will stop
-        stopAlarm.setOnClickListener(new View.OnClickListener() {
+        Button stopButton = (Button) findViewById(R.id.Stop);
+        stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int requestID = 1;
+
+                Intent intent = new Intent(AlarmRecieverActivity.this,AlarmRecieverActivity.class);
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(AlarmRecieverActivity.this,requestID,
+                        intent,0);
+                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                am.cancel(pendingIntent);
                 //stops the music
                 mMediaPlayer.stop();
-                //takes the pendingintent and stops it
                 finish();
+                Toast.makeText(getApplicationContext(),"Alarm has been stopped"
+                        , Toast.LENGTH_LONG).show();
             }
         });
 

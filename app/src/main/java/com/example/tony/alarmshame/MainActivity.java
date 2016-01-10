@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
 
                 //shows the time picker
                 //create the alarm at TimePickerDialog
-                //showDialog(dialog_id);
+                showDialog(dialog_id);
                 int requestID = 1;
 
                 //set i to time till alarm
                 int i = 10;
-                Intent intent = new Intent(MainActivity.this,AlarmRecieverActivity.class);
 
+                Intent intent = new Intent(MainActivity.this,AlarmRecieverActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
 
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 mToast.show();
             }
         });
+
     }
 
 
