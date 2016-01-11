@@ -19,7 +19,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AnalogClock;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -30,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     static final int dialog_id = 0;
     int hour,minute;
-    private Button startButton;
     private Toast mToast;
+    private Switch mySwitch;
+    TimePickerFragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,38 +42,61 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        startButton =(Button) findViewById(R.id.StartAlarm);
-        startButton.setOnClickListener(new View.OnClickListener() {
+
+        mySwitch = (Switch) findViewById(R.id.alarmSwitch);
+        //if the switch is turned on
+        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Calendar c = Calendar.getInstance();
+                int currentTime = (c.get(c.HOUR_OF_DAY) *60 * 60) +
+                        (c.get(c.MINUTE) * 60) + c.get(c.SECOND) ;
+                if(isChecked){
+                    //shows the time picker
+                    //create the alarm at TimePickerDialog
+                    //showDialog(dialog_id);
+                    int requestID = 1;
 
-                //shows the time picker
-                //create the alarm at TimePickerDialog
-                //showDialog(dialog_id);
-                int requestID = 1;
-                //showTimePickerDialog(v);
-                //set i to time till alarm
-                int i = 10;
+                    //set i to time till alarm
+                    int setTime = (newFragment.getHour() * 60 * 60) + (newFragment.getMinute() * 60);
+                    int i = setTime - currentTime;
+                    if (i <0){
+                        i = i+(60*60*24);
+                    }
 
-                Intent intent = new Intent(MainActivity.this,AlarmRecieverActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    Intent intent = new Intent(MainActivity.this,AlarmRecieverActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,requestID,
-                        intent,PendingIntent.FLAG_CANCEL_CURRENT);
-                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                //sets the alarm into an infinite loop
-                //use 15*1000 for testing
-                //use 10*60*1000 for release or make variable but that's later
-                am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(i*1000),
-                        15 * 1000,pendingIntent);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,requestID,
+                            intent,PendingIntent.FLAG_CANCEL_CURRENT);
+                    AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    //sets the alarm into an infinite loop
+                    //use 15*1000 for testing
+                    //use 10*60*1000 for release or make variable but that's later
+                    am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(i*1000),
+                            10 * 60 * 1000,pendingIntent);
 
-                if (mToast != null){
-                    mToast.cancel();
+                    if (mToast != null){
+                        mToast.cancel();
+                    }
+
+                    mToast = Toast.makeText(getApplicationContext(),
+                            "Alarm starts in " + i + " seconds"+
+                                    newFragment.getMinute()+"minute"+newFragment.getHour()+"hour", Toast.LENGTH_LONG);
+                    mToast.show();
+                } else {
+                    int requestID = 1;
+
+                    Intent intent = new Intent(MainActivity.this,AlarmRecieverActivity.class);
+
+                    PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,requestID,
+                            intent,0);
+                    AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    am.cancel(pendingIntent);
+
+                    Toast.makeText(getApplicationContext(),"Alarm has been stopped"
+                            , Toast.LENGTH_LONG).show();
                 }
-
-                mToast = Toast.makeText(getApplicationContext(),
-                        "Alarm starts in " + i + " seconds", Toast.LENGTH_LONG);
-                mToast.show();
             }
         });
 
@@ -109,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+        newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
@@ -127,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     public void setViewTime(int hour, int minute) {//},Activity act) {
         //AnalogClock ac = new act.findViewById(R.id.analogClock);
         //ac.set
-        Toast.makeText(getApplicationContext(), hour + " " + minute, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), hour + ":" + minute, Toast.LENGTH_SHORT).show();
     }
 }
 
