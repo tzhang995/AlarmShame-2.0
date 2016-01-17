@@ -47,9 +47,8 @@
         android:text="Time:"
         android:id="@+id/textView"
         android:layout_alignTop="@+id/alarmSwitch"
-        android:layout_alignBottom="@+id/alarmSwitch"
-        android:layout_toLeftOf="@+id/analogClock"
-        android:layout_toStartOf="@+id/analogClock" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,4 +60,15 @@
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView" />
 
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/monday"
+        android:background="@drawable/round_button"
+        android:layout_below="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:textOff="M"
+        android:textOn="M" />
 </RelativeLayout>

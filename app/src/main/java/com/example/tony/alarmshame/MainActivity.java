@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     //set i to time till alarm
                     int setTime = (newFragment.getHour() * 60 * 60) + (newFragment.getMinute() * 60);
                     int i = setTime - currentTime;
+                    //checks if it is tomorrow
                     if (i <0){
                         i = i+(60*60*24);
                     }
