@@ -16,9 +16,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/analogClock"
-        android:layout_above="@+id/digitalClock"
-        android:layout_centerHorizontal="true"
-        android:onClick="showTimePickerDialog" />
+        android:onClick="showTimePickerDialog"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <DigitalClock
         android:layout_width="wrap_content"
@@ -46,7 +47,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Time:"
         android:id="@+id/textView"
-        android:layout_alignTop="@+id/alarmSwitch"
+        android:layout_alignBaseline="@+id/alarmSwitch"
+        android:layout_alignBottom="@+id/alarmSwitch"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -66,9 +68,75 @@
         android:text="New ToggleButton"
         android:id="@+id/monday"
         android:background="@drawable/round_button"
-        android:layout_below="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2"
         android:textOff="M"
-        android:textOn="M" />
+        android:textOn="M"
+        android:layout_below="@+id/textView2"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/tuesday"
+        android:background="@drawable/round_button"
+        android:textOff="T"
+        android:textOn="T"
+        android:layout_alignTop="@+id/monday"
+        android:layout_alignLeft="@+id/analogClock"
+        android:layout_alignParentStart="true" />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/wednesday"
+        android:background="@drawable/round_button"
+        android:textOff="W"
+        android:textOn="W"
+        android:layout_alignTop="@+id/thursday"
+        android:layout_centerHorizontal="true" />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/thursday"
+        android:background="@drawable/round_button"
+        android:textOff="TH"
+        android:textOn="TH"
+        android:layout_alignRight="@+id/analogClock"
+        android:layout_alignEnd="@+id/analogClock"
+        android:layout_alignTop="@+id/friday" />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/friday"
+        android:background="@drawable/round_button"
+        android:textOff="F"
+        android:textOn="F"
+        android:layout_alignTop="@+id/saturday"
+        android:layout_alignLeft="@+id/alarmSwitch"
+        android:layout_alignStart="@+id/alarmSwitch" />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/saturday"
+        android:background="@drawable/round_button"
+        android:textOff="S"
+        android:textOn="S"
+        android:layout_alignTop="@+id/monday"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignBottom="@+id/monday" />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/sunday"
+        android:background="@drawable/round_button"
+        android:textOff="S"
+        android:textOn="S"
+        android:layout_alignTop="@+id/monday"
+        android:layout_alignLeft="@+id/analogClock"
+        android:layout_alignStart="@+id/analogClock" />
 </RelativeLayout>

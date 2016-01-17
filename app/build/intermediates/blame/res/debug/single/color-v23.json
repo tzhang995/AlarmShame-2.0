@@ -1,14 +1,18 @@
 [
     {
-        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/app/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
-        "source": "/home/tony/AndroidStudioProjects/AlarmShame/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color-v23/abc_color_highlight_material.xml"
+        "merged": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
     },
     {
-        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
+        "merged": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
     },
     {
-        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
+        "merged": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "E:\\android\\AlarmShame-2.0\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "E:\\android\\AlarmShame-2.0\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
     }
 ]

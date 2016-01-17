@@ -70,9 +70,10 @@
         android:background="@drawable/round_button"
         android:textOff="M"
         android:textOn="M"
+        android:layout_gravity="bottom"
         android:layout_below="@+id/textView2"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:layout_toRightOf="@+id/sunday"
+        android:layout_toEndOf="@+id/sunday" />
     <ToggleButton
         android:layout_width="60px"
         android:layout_height="60px"
@@ -81,9 +82,10 @@
         android:background="@drawable/round_button"
         android:textOff="T"
         android:textOn="T"
+        android:layout_gravity="bottom"
         android:layout_alignTop="@+id/monday"
-        android:layout_alignLeft="@+id/analogClock"
-        android:layout_alignParentStart="true" />
+        android:layout_toRightOf="@+id/monday"
+        android:layout_toEndOf="@+id/monday" />
     <ToggleButton
         android:layout_width="60px"
         android:layout_height="60px"
@@ -92,8 +94,10 @@
         android:background="@drawable/round_button"
         android:textOff="W"
         android:textOn="W"
-        android:layout_alignTop="@+id/thursday"
-        android:layout_centerHorizontal="true" />
+        android:layout_gravity="bottom"
+        android:layout_alignTop="@+id/tuesday"
+        android:layout_toRightOf="@+id/tuesday"
+        android:layout_toEndOf="@+id/tuesday" />
     <ToggleButton
         android:layout_width="60px"
         android:layout_height="60px"
@@ -102,9 +106,10 @@
         android:background="@drawable/round_button"
         android:textOff="TH"
         android:textOn="TH"
-        android:layout_alignRight="@+id/analogClock"
-        android:layout_alignEnd="@+id/analogClock"
-        android:layout_alignTop="@+id/friday" />
+        android:layout_gravity="bottom"
+        android:layout_alignTop="@+id/wednesday"
+        android:layout_toRightOf="@+id/wednesday"
+        android:layout_toEndOf="@+id/wednesday" />
     <ToggleButton
         android:layout_width="60px"
         android:layout_height="60px"
@@ -113,9 +118,10 @@
         android:background="@drawable/round_button"
         android:textOff="F"
         android:textOn="F"
-        android:layout_alignTop="@+id/saturday"
-        android:layout_alignLeft="@+id/alarmSwitch"
-        android:layout_alignStart="@+id/alarmSwitch" />
+        android:layout_gravity="bottom"
+        android:layout_alignTop="@+id/thursday"
+        android:layout_toRightOf="@+id/thursday"
+        android:layout_toEndOf="@+id/thursday" />
     <ToggleButton
         android:layout_width="60px"
         android:layout_height="60px"
@@ -124,10 +130,10 @@
         android:background="@drawable/round_button"
         android:textOff="S"
         android:textOn="S"
-        android:layout_alignTop="@+id/monday"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignBottom="@+id/monday" />
+        android:layout_below="@+id/textView2"
+        android:layout_toRightOf="@+id/friday"
+        android:layout_toEndOf="@+id/friday"
+        android:layout_gravity="bottom" />
     <ToggleButton
         android:layout_width="60px"
         android:layout_height="60px"
@@ -136,7 +142,8 @@
         android:background="@drawable/round_button"
         android:textOff="S"
         android:textOn="S"
-        android:layout_alignTop="@+id/monday"
-        android:layout_alignLeft="@+id/analogClock"
-        android:layout_alignStart="@+id/analogClock" />
+        android:layout_gravity="bottom"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
