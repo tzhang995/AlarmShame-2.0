@@ -36,6 +36,8 @@ public class TimePickerFragment extends DialogFragment
         //Toast.makeText(getActivity(), "hi", Toast.LENGTH_SHORT).show();
         hour = hourOfDay;
         minutes = minute;
+        MainActivity.hour = hourOfDay;
+        MainActivity.minute = minute;
         Toast.makeText(getActivity(), hourOfDay + " " + minute, Toast.LENGTH_SHORT).show();
     }
     public int getHour(){

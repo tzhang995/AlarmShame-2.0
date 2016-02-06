@@ -2260,7 +2260,7 @@ containing a value of this type.
         public static final int fill_horizontal=0x7f0c002e;
         public static final int fill_vertical=0x7f0c0021;
         public static final int fixed=0x7f0c0037;
-        public static final int friday=0x7f0c0078;
+        public static final int friday=0x7f0c0079;
         public static final int home=0x7f0c0004;
         public static final int homeAsUp=0x7f0c000f;
         public static final int icon=0x7f0c0042;
@@ -2289,7 +2289,7 @@ containing a value of this type.
         public static final int progress_horizontal=0x7f0c0007;
         public static final int radio=0x7f0c0054;
         public static final int right=0x7f0c0023;
-        public static final int saturday=0x7f0c0079;
+        public static final int saturday=0x7f0c007a;
         public static final int screen=0x7f0c0027;
         public static final int scroll=0x7f0c0018;
         public static final int scrollIndicatorDown=0x7f0c004e;
@@ -2322,7 +2322,7 @@ containing a value of this type.
         public static final int start=0x7f0c0024;
         public static final int status_bar_latest_event_content=0x7f0c0084;
         public static final int submit_area=0x7f0c0065;
-        public static final int sunday=0x7f0c007a;
+        public static final int sunday=0x7f0c0075;
         public static final int tabMode=0x7f0c000d;
         public static final int text=0x7f0c008c;
         public static final int text2=0x7f0c008a;
@@ -2330,18 +2330,18 @@ containing a value of this type.
         public static final int textSpacerNoButtons=0x7f0c004d;
         public static final int textView=0x7f0c0072;
         public static final int textView2=0x7f0c0073;
-        public static final int thursday=0x7f0c0077;
+        public static final int thursday=0x7f0c0078;
         public static final int time=0x7f0c0088;
         public static final int title=0x7f0c0043;
         public static final int title_template=0x7f0c0048;
         public static final int toolbar=0x7f0c0069;
         public static final int top=0x7f0c0025;
         public static final int topPanel=0x7f0c0047;
-        public static final int tuesday=0x7f0c0075;
+        public static final int tuesday=0x7f0c0076;
         public static final int up=0x7f0c0009;
         public static final int useLogo=0x7f0c0014;
         public static final int view_offset_helper=0x7f0c000a;
-        public static final int wednesday=0x7f0c0076;
+        public static final int wednesday=0x7f0c0077;
         public static final int withText=0x7f0c0036;
         public static final int wrap_content=0x7f0c0039;
     }

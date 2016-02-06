@@ -1,18 +1,22 @@
 [
     {
-        "merged": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",
-        "source": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",
+        "source": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",
-        "source": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/ic_launcher.png",
+        "source": "/home/tony/AndroidStudioProjects/AlarmShame/app/src/main/res/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",
-        "source": "E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\android\\AlarmShame-2.0\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",
+        "source": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\android\\AlarmShame-2.0\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\android\\AlarmShame-2.0\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",
-        "source": "E:\\android\\AlarmShame-2.0\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",
+        "source": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",
+        "source": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\home\\tony\\AndroidStudioProjects\\AlarmShame\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     }
 ]

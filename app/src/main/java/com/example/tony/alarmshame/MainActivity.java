@@ -9,6 +9,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.AlarmClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,16 +26,25 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import java.text.DateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     static final int dialog_id = 0;
-    int hour,minute;
+    static int hour,minute;
     private Toast mToast;
     private Switch mySwitch;
     TimePickerFragment newFragment;
+
+    //requestID for each days of the week
+    //first digit is for request id
+    //second number is if the alarm for this request is on
+    int requestID[] = {0,0,0,0,0,0,0};
+    private final int bArray [] = {R.id.sunday,R.id.monday,R.id.tuesday,R.id.wednesday,R.id.thursday,
+    R.id.friday,R.id.saturday};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,61 +52,78 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         mySwitch = (Switch) findViewById(R.id.alarmSwitch);
         //if the switch is turned on
         mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Calendar c = Calendar.getInstance();
-                int currentTime = (c.get(c.HOUR_OF_DAY) *60 * 60) +
-                        (c.get(c.MINUTE) * 60) + c.get(c.SECOND) ;
-                if(isChecked){
-                    //shows the time picker
-                    //create the alarm at TimePickerDialog
-                    //showDialog(dialog_id);
-                    int requestID = 1;
 
+                if(isChecked){
                     //set i to time till alarm
-                    int setTime = (newFragment.getHour() * 60 * 60) + (newFragment.getMinute() * 60);
+                    int setTime = (hour * 60 * 60) + (minute * 60);
+                    Calendar c = Calendar.getInstance();
+                    int currentTime = (c.get(c.HOUR_OF_DAY) *60 * 60) +
+                            (c.get(c.MINUTE) * 60) + c.get(c.SECOND) ;
                     int i = setTime - currentTime;
                     //checks if it is tomorrow
                     if (i <0){
                         i = i+(60*60*24);
                     }
 
-                    Intent intent = new Intent(MainActivity.this,AlarmRecieverActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-                    PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,requestID,
-                            intent,PendingIntent.FLAG_CANCEL_CURRENT);
-                    AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                    //sets the alarm into an infinite loop
-                    //use 15*1000 for testing
-                    //use 10*60*1000 for release or make variable but that's later
-                    am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(i*1000),
-                            10 * 60 * 1000,pendingIntent);
+                    //A forloop that creates a pending intent on the
+                    // days that they want the alarm to be activated
+                    for(int allDay = 0; allDay <7; allDay++) {
 
+                        //checks to see the button for that day is activated or not
+                        ToggleButton button = (ToggleButton) findViewById(bArray[allDay]);
+                        if (button.isChecked()){
+                            requestID[allDay] = 1;
+                        }
+
+
+                        //If the button for that day is checked, we create a new pendingintent
+                        if(requestID[allDay] == 1) {
+                            Intent intent = new Intent(MainActivity.this, AlarmRecieverActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, bArray[allDay],
+                                    intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                            AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                            //sets the alarm into an infinite loop
+                            //use 15*1000 for testing
+                            //use 10*60*1000 for release or make variable but that's later
+                            am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (i * 1000 + 3* 1000* allDay),
+                                    15 * 1000, pendingIntent);
+                        }
+                    }
+
+
+                    ///mmmmmToast
                     if (mToast != null){
                         mToast.cancel();
                     }
 
                     mToast = Toast.makeText(getApplicationContext(),
-                            "Alarm starts in " + i + " seconds"+
-                                    newFragment.getMinute()+"minute"+newFragment.getHour()+"hour", Toast.LENGTH_LONG);
+                            "Alarm starts in " + i, Toast.LENGTH_SHORT);
                     mToast.show();
                 } else {
-                    int requestID = 1;
+                    //stops the alarms
+                    for(int allDay = 0; allDay <7; allDay++) {
+                        if (requestID[allDay] == 1) {
+                            Intent intent = new Intent(MainActivity.this, AlarmRecieverActivity.class);
 
-                    Intent intent = new Intent(MainActivity.this,AlarmRecieverActivity.class);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, bArray[allDay],
+                                    intent, 0);
+                            AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                            am.cancel(pendingIntent);
 
-                    PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,requestID,
-                            intent,0);
-                    AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                    am.cancel(pendingIntent);
-
-                    Toast.makeText(getApplicationContext(),"Alarm has been stopped"
-                            , Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Alarm has been stopped"
+                                    , Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
             }
         });
@@ -139,17 +166,6 @@ public class MainActivity extends AppCompatActivity {
         newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
-
-    private TimePickerDialog.OnTimeSetListener mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int hour_minute) {
-            hour = hourOfDay;
-            minute = hour_minute;
-            //TODO language syntax
-            //Toast.makeText(getBaseContext(),"Alarm is set to " + hour+ " hours and " +minute + " minutes",
-            //        Toast.LENGTH_LONG).show();
-        }
-    };
 
     public void setViewTime(int hour, int minute) {//},Activity act) {
         //AnalogClock ac = new act.findViewById(R.id.analogClock);
