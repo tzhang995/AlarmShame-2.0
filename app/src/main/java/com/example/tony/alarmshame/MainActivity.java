@@ -68,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
                             (c.get(c.MINUTE) * 60) + c.get(c.SECOND) ;
                     int i = setTime - currentTime;
                     //checks if it is tomorrow
+                    boolean later = false;
                     if (i <0){
-                        i = i+(60*60*24);
+                        later = true;
                     }
 
 
@@ -96,9 +97,16 @@ public class MainActivity extends AppCompatActivity {
                             //sets the alarm into an infinite loop
                             //use 15*1000 for testing
                             //use 10*60*1000 for release or make variable but that's later
-                            am.setRepeating(AlarmManager.RTC_WAKEUP,
-                                    System.currentTimeMillis() + (i * 1000 + 3* 1000* allDay),
-                                    15 * 1000, pendingIntent);
+                            //if later means false then that means it is close and today - sunday can equal to zero
+                            if (later == false) {
+                                am.setRepeating(AlarmManager.RTC_WAKEUP,
+                                        System.currentTimeMillis() + (i * 1000 + ((Calendar.DAY_OF_WEEK - Calendar.SUNDAY + allDay) * 60*60*24)),
+                                        15 * 1000, pendingIntent);
+                            } else {
+                                am.setRepeating(AlarmManager.RTC_WAKEUP,
+                                        System.currentTimeMillis() + (i * 1000 + ((Calendar.DAY_OF_WEEK - Calendar.SUNDAY + 1 + allDay) * 60*60*24)),
+                                        15 * 1000, pendingIntent);
+                            }
                         }
                     }
 
