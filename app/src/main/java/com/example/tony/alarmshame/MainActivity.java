@@ -88,14 +88,16 @@ public class MainActivity extends AppCompatActivity {
                         if(requestID[allDay] == 1) {
                             Intent intent = new Intent(MainActivity.this, AlarmRecieverActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, bArray[allDay],
+                            //Creates a Pending intent where the requestID is the days where they want the alarm to activate
+                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,
+                                    Calendar.SUNDAY+allDay,
                                     intent, PendingIntent.FLAG_CANCEL_CURRENT);
                             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
                             //sets the alarm into an infinite loop
                             //use 15*1000 for testing
                             //use 10*60*1000 for release or make variable but that's later
-                            am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (i * 1000 + 3* 1000* allDay),
+                            am.setRepeating(AlarmManager.RTC_WAKEUP,
+                                    System.currentTimeMillis() + (i * 1000 + 3* 1000* allDay),
                                     15 * 1000, pendingIntent);
                         }
                     }
@@ -115,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
                         if (requestID[allDay] == 1) {
                             Intent intent = new Intent(MainActivity.this, AlarmRecieverActivity.class);
 
-                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, bArray[allDay],
-                                    intent, 0);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,
+                                    Calendar.SUNDAY + allDay, intent, 0);
                             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
                             am.cancel(pendingIntent);
 

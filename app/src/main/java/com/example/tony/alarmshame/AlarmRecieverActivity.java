@@ -63,7 +63,8 @@ public class AlarmRecieverActivity extends Activity{
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int requestID = 1;
+                //stops the request at that day of the week
+                int requestID = Calendar.DAY_OF_WEEK;
 
                 Intent intent = new Intent(AlarmRecieverActivity.this, AlarmRecieverActivity.class);
 
@@ -74,9 +75,7 @@ public class AlarmRecieverActivity extends Activity{
                 //stops the music
                 mMediaPlayer.stop();
 
-                /**********************************/
-                //TODO FULL IMPLEMENTATION
-                /*
+
                 //creates new alarm if you made it repeating
                 Calendar c = Calendar.getInstance();
                 int currentTime = (c.get(c.HOUR_OF_DAY) *60 * 60) +
@@ -84,9 +83,11 @@ public class AlarmRecieverActivity extends Activity{
 
                 int setTime = (MainActivity.hour * 60 * 60) + (MainActivity.minute * 60);
                 int i = setTime - currentTime;
-                //checks if it is tomorrow
+                //checks if it is 6 days from now or 7 days from now
                 if (i <0){
-                    i = i+(60*60*24);
+                    i = i+(60*60*24 * 6);
+                } else {
+                    i = i + (60 * 60 * 24 * 7);
                 }
 
                 intent = new Intent(AlarmRecieverActivity.this,AlarmRecieverActivity.class);
@@ -100,7 +101,6 @@ public class AlarmRecieverActivity extends Activity{
                 //use 10*60*1000 for release or make variable but that's later
                 am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(i*1000),
                         10 * 60 * 1000,pendingIntent);
-                /**********************************************/
 
                 vibrator.cancel();
                 finish();
