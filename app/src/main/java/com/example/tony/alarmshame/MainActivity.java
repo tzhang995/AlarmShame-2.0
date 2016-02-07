@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     int currentTime = (c.get(c.HOUR_OF_DAY) *60 * 60) +
                             (c.get(c.MINUTE) * 60) + c.get(c.SECOND) ;
                     int i = setTime - currentTime;
+                    int numSecsInDay = 60 * 60 * 24;
                     //checks if it is tomorrow
                     boolean later = false;
                     if (i <0){
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
                         ToggleButton button = (ToggleButton) findViewById(bArray[allDay]);
                         if (button.isChecked()){
                             requestID[allDay] = 1;
+                        } else {
+                            requestID[allDay] = 0;
                         }
 
 
@@ -94,24 +97,33 @@ public class MainActivity extends AppCompatActivity {
                                     Calendar.SUNDAY+allDay,
                                     intent, PendingIntent.FLAG_CANCEL_CURRENT);
                             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                            //sets the alarm into an infinite loop
-                            //use 15*1000 for testing
-                            //use 10*60*1000 for release or make variable but that's later
+
+                            int alarmStartIn = i* 1000;
+
                             //if later means false then that means it is close and today - sunday can equal to zero
                             if (later == false) {
-                                am.setRepeating(AlarmManager.RTC_WAKEUP,
-                                        System.currentTimeMillis() + (i * 1000 + ((Calendar.DAY_OF_WEEK - Calendar.SUNDAY + allDay) * 60*60*24)),
-                                        15 * 1000, pendingIntent);
+                                alarmStartIn = alarmStartIn +1000*((c.get(Calendar.DAY_OF_WEEK) - Calendar.SUNDAY + allDay) * numSecsInDay);
+                                mToast = Toast.makeText(getApplicationContext(),
+                                        "Alarm starts in false " + (i+((c.get(Calendar.DAY_OF_WEEK) - Calendar.SUNDAY + allDay) * numSecsInDay)), Toast.LENGTH_SHORT);
                             } else {
-                                am.setRepeating(AlarmManager.RTC_WAKEUP,
-                                        System.currentTimeMillis() + (i * 1000 + ((Calendar.DAY_OF_WEEK - Calendar.SUNDAY + 1 + allDay) * 60*60*24)),
-                                        15 * 1000, pendingIntent);
+
+                                mToast = Toast.makeText(getApplicationContext(),
+                                        "Alarm starts in true " + i + ((Calendar.DAY_OF_WEEK - Calendar.SUNDAY+ 1) * numSecsInDay), Toast.LENGTH_SHORT);
                             }
+
+                            //sets the alarm into an infinite loop
+                            //use 15*1000 for testing
+                            //use 10*60*1000 for release
+                            am.setRepeating(AlarmManager.RTC_WAKEUP,
+                                    System.currentTimeMillis() + alarmStartIn,
+                                    15 * 1000, pendingIntent);
+                            mToast.show();
                         }
                     }
 
 
                     ///mmmmmToast
+                    /*
                     if (mToast != null){
                         mToast.cancel();
                     }
@@ -119,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     mToast = Toast.makeText(getApplicationContext(),
                             "Alarm starts in " + i, Toast.LENGTH_SHORT);
                     mToast.show();
+                    */
                 } else {
                     //stops the alarms
                     for(int allDay = 0; allDay <7; allDay++) {

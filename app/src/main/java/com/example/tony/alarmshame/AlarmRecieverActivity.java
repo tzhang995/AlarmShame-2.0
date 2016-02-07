@@ -63,8 +63,9 @@ public class AlarmRecieverActivity extends Activity{
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar c = Calendar.getInstance();
                 //stops the request at that day of the week
-                int requestID = Calendar.DAY_OF_WEEK;
+                int requestID = c.get(Calendar.DAY_OF_WEEK);
 
                 Intent intent = new Intent(AlarmRecieverActivity.this, AlarmRecieverActivity.class);
 
@@ -77,7 +78,7 @@ public class AlarmRecieverActivity extends Activity{
 
 
                 //creates new alarm if you made it repeating
-                Calendar c = Calendar.getInstance();
+
                 int currentTime = (c.get(c.HOUR_OF_DAY) *60 * 60) +
                         (c.get(c.MINUTE) * 60) + c.get(c.SECOND) ;
 
