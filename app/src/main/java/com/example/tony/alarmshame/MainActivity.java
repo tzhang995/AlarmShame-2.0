@@ -1,34 +1,22 @@
 package com.example.tony.alarmshame;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.provider.AlarmClock;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AnalogClock;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,55 +49,58 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if(isChecked){
-                    //set i to time till alarm
+
+                    // TODO: Grab actual time from picker
+
+                    // Compute the alarm time in minutes...
                     int setTime = (hour * 60 * 60) + (minute * 60);
+                    // ...compute the current time in seconds...
                     Calendar c = Calendar.getInstance();
                     int currentTime = (c.get(c.HOUR_OF_DAY) *60 * 60) +
                             (c.get(c.MINUTE) * 60) + c.get(c.SECOND) ;
-                    int i = setTime - currentTime;
+
+                    // ...and find the difference in seconds
+                    int differenceTime = setTime - currentTime;
+
                     int numSecsInDay = 60 * 60 * 24;
-                    //checks if it is tomorrow
-                    boolean later = false;
-                    if (i <0){
-                        later = true;
-                    }
 
+                    // Checks if it is tomorrow instead
+                    boolean later = (differenceTime <= 0);
 
-                    //A forloop that creates a pending intent on the
-                    // days that they want the alarm to be activated
-                    for(int allDay = 0; allDay <7; allDay++) {
+                    // Iterate through each enumerated day of the week and start alarms based the user's choices
+                    for(int forDay = 0; forDay <7; forDay++) {
 
-                        //checks to see the button for that day is activated or not
-                        ToggleButton button = (ToggleButton) findViewById(bArray[allDay]);
-                        if (button.isChecked()){
-                            requestID[allDay] = 1;
-                        } else {
-                            requestID[allDay] = 0;
-                        }
+                        // Determine whether the user has selected for the alarm to activate on forDay
+                        ToggleButton button = (ToggleButton) findViewById(bArray[forDay]);
+                        requestID[forDay] = button.isChecked() ? 1 : 0;
 
-
-                        //If the button for that day is checked, we create a new pendingintent
-                        if(requestID[allDay] == 1) {
+                        // Create a new PendingIntent (Alarm) if the day of week is selected
+                        if(requestID[forDay] == 1) {
                             Intent intent = new Intent(MainActivity.this, AlarmRecieverActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            //Creates a Pending intent where the requestID is the days where they want the alarm to activate
+
+                            // Creates a PendingIntent for the alarm to activate
                             PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,
-                                    Calendar.SUNDAY+allDay,
+                                    Calendar.SUNDAY + forDay,
                                     intent, PendingIntent.FLAG_CANCEL_CURRENT);
                             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                            int alarmStartIn = i* 1000;
-
-                            //if later means false then that means it is close and today - sunday can equal to zero
-                            if (later == false) {
-                                alarmStartIn = alarmStartIn +1000*((c.get(Calendar.DAY_OF_WEEK) - Calendar.SUNDAY + allDay) * numSecsInDay);
-                                mToast = Toast.makeText(getApplicationContext(),
-                                        "Alarm starts in false " + (i+((c.get(Calendar.DAY_OF_WEEK) - Calendar.SUNDAY + allDay) * numSecsInDay)), Toast.LENGTH_SHORT);
-                            } else {
-
-                                mToast = Toast.makeText(getApplicationContext(),
-                                        "Alarm starts in true " + i + ((Calendar.DAY_OF_WEEK - Calendar.SUNDAY+ 1) * numSecsInDay), Toast.LENGTH_SHORT);
+                            // Find number of days until alarm activation
+                            int diffBetweenDays = forDay - (c.get(Calendar.DAY_OF_WEEK) - 1);
+                            if (diffBetweenDays < 0) {
+                                diffBetweenDays += 7;
+                            } else if (diffBetweenDays == 0 && differenceTime <= 0) {
+                                diffBetweenDays += 7;
                             }
+
+                            // Convert to milliseconds
+                            int alarmStartIn = differenceTime * 1000;
+
+                            // Compute the final time until the first call of the alarm
+                            alarmStartIn = alarmStartIn + (1000 * diffBetweenDays * numSecsInDay);
+                            mToast = Toast.makeText(getApplicationContext(),
+                                    "Alarm starts in true " + (alarmStartIn/1000), Toast.LENGTH_SHORT);
+                            System.out.println("Day: " + diffBetweenDays + " at " + (alarmStartIn/1000));
 
                             //sets the alarm into an infinite loop
                             //use 15*1000 for testing
@@ -134,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     */
                 } else {
                     //stops the alarms
-                    for(int allDay = 0; allDay <7; allDay++) {
+                    for (int allDay = 0; allDay < 7; ++allDay) {
                         if (requestID[allDay] == 1) {
                             Intent intent = new Intent(MainActivity.this, AlarmRecieverActivity.class);
 
