@@ -44,14 +44,24 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        ListView listView = (ListView) findViewById(R.id.listview);
+        final ListView listView = (ListView) findViewById(R.id.listview);
         generateListContent();
         listView.setAdapter(new MyListAdapter(this, R.layout.alarm_list,data));
+
+        Button addAlarm = (Button) findViewById(R.id.addAlarm);
+
+        addAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.add("what" + data.size());
+                listView.setAdapter(new MyListAdapter(getBaseContext(), R.layout.alarm_list, data));
+            }
+        });
 
     }
 
     private void generateListContent(){
-        for(int i = 0; i<10;i++){
+        for(int i = 0; i<1;i++){
             data.add("what" + i);
         }
     }
@@ -113,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView = inflater.inflate(layout,parent,false);
                 ViewHolder viewHolder= new ViewHolder();
-                viewHolder.alarmSwitch = (Switch) convertView.findViewById(R.id.list_item_alarmSwitch);
                 viewHolder.alarmTime = (TextView) convertView.findViewById(R.id.list_item_alarmTime);
                 viewHolder.alarmSunday = (Button) convertView.findViewById(R.id.list_item_sunday);
                 viewHolder.alarmMonday = (Button) convertView.findViewById(R.id.list_item_monday);
@@ -122,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.alarmThursday = (Button) convertView.findViewById(R.id.list_item_thursday);
                 viewHolder.alarmFriday = (Button) convertView.findViewById(R.id.list_item_friday);
                 viewHolder.alarmSaturday = (Button) convertView.findViewById(R.id.list_item_saturday);
+                viewHolder.alarmSwitch = (Switch) convertView.findViewById(R.id.list_item_alarmSwitch);
                 convertView.setTag(viewHolder);
 
             } else {
