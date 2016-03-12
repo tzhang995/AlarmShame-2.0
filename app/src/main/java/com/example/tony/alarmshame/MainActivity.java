@@ -9,30 +9,32 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     static final int dialog_id = 0;
     static int hour,minute;
     private Toast mToast;
-    private Switch mySwitch;
     TimePickerFragment newFragment;
 
-    //requestID for each days of the week
-    //first digit is for request id
-    //second number is if the alarm for this request is on
-    int requestID[] = {0,0,0,0,0,0,0};
-    private final int bArray [] = {R.id.sunday,R.id.monday,R.id.tuesday,R.id.wednesday,R.id.thursday,
-    R.id.friday,R.id.saturday};
+    private ArrayList<String> data = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,108 +44,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        mySwitch = (Switch) findViewById(R.id.alarmSwitch);
-        //if the switch is turned on
-        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if(isChecked){
-
-                    // TODO: Grab actual time from picker
-
-                    // Compute the alarm time in minutes...
-                    int setTime = (hour * 60 * 60) + (minute * 60);
-                    // ...compute the current time in seconds...
-                    Calendar c = Calendar.getInstance();
-                    int currentTime = (c.get(c.HOUR_OF_DAY) *60 * 60) +
-                            (c.get(c.MINUTE) * 60) + c.get(c.SECOND) ;
-
-                    // ...and find the difference in seconds
-                    int differenceTime = setTime - currentTime;
-
-                    int numSecsInDay = 60 * 60 * 24;
-
-                    // Checks if it is tomorrow instead
-                    boolean later = (differenceTime <= 0);
-
-                    // Iterate through each enumerated day of the week and start alarms based the user's choices
-                    for(int forDay = 0; forDay <7; forDay++) {
-
-                        // Determine whether the user has selected for the alarm to activate on forDay
-                        ToggleButton button = (ToggleButton) findViewById(bArray[forDay]);
-                        requestID[forDay] = button.isChecked() ? 1 : 0;
-
-                        // Create a new PendingIntent (Alarm) if the day of week is selected
-                        if(requestID[forDay] == 1) {
-                            Intent intent = new Intent(MainActivity.this, AlarmRecieverActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-                            // Creates a PendingIntent for the alarm to activate
-                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,
-                                    Calendar.SUNDAY + forDay,
-                                    intent, PendingIntent.FLAG_CANCEL_CURRENT);
-                            AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-                            // Find number of days until alarm activation
-                            int diffBetweenDays = forDay - (c.get(Calendar.DAY_OF_WEEK) - 1);
-                            if (diffBetweenDays < 0) {
-                                diffBetweenDays += 7;
-                            } else if (diffBetweenDays == 0 && differenceTime <= 0) {
-                                diffBetweenDays += 7;
-                            }
-
-                            // Convert to milliseconds
-                            int alarmStartIn = differenceTime * 1000;
-
-                            // Compute the final time until the first call of the alarm
-                            alarmStartIn = alarmStartIn + (1000 * diffBetweenDays * numSecsInDay);
-                            mToast = Toast.makeText(getApplicationContext(),
-                                    "Alarm starts in true " + (alarmStartIn/1000), Toast.LENGTH_SHORT);
-                            System.out.println("Day: " + diffBetweenDays + " at " + (alarmStartIn/1000));
-
-                            //sets the alarm into an infinite loop
-                            //use 15*1000 for testing
-                            //use 10*60*1000 for release
-                            am.setRepeating(AlarmManager.RTC_WAKEUP,
-                                    System.currentTimeMillis() + alarmStartIn,
-                                    15 * 1000, pendingIntent);
-                            mToast.show();
-                        }
-                    }
-
-
-                    ///mmmmmToast
-                    /*
-                    if (mToast != null){
-                        mToast.cancel();
-                    }
-
-                    mToast = Toast.makeText(getApplicationContext(),
-                            "Alarm starts in " + i, Toast.LENGTH_SHORT);
-                    mToast.show();
-                    */
-                } else {
-                    //stops the alarms
-                    for (int allDay = 0; allDay < 7; ++allDay) {
-                        if (requestID[allDay] == 1) {
-                            Intent intent = new Intent(MainActivity.this, AlarmRecieverActivity.class);
-
-                            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,
-                                    Calendar.SUNDAY + allDay, intent, 0);
-                            AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                            am.cancel(pendingIntent);
-
-                            Toast.makeText(getApplicationContext(), "Alarm has been stopped"
-                                    , Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }
-        });
+        ListView listView = (ListView) findViewById(R.id.listview);
+        generateListContent();
+        listView.setAdapter(new MyListAdapter(this, R.layout.alarm_list,data));
 
     }
 
+    private void generateListContent(){
+        for(int i = 0; i<10;i++){
+            data.add("what" + i);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -185,6 +96,54 @@ public class MainActivity extends AppCompatActivity {
         //AnalogClock ac = new act.findViewById(R.id.analogClock);
         //ac.set
         Toast.makeText(getApplicationContext(), hour + ":" + minute, Toast.LENGTH_SHORT).show();
+    }
+
+    private class MyListAdapter extends ArrayAdapter<String>{
+        private int layout;
+        public MyListAdapter(Context context, int resource, List<String> objects) {
+            super(context, resource, objects);
+            layout = resource;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder mainViewHolder = null;
+
+            if(convertView == null){
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                convertView = inflater.inflate(layout,parent,false);
+                ViewHolder viewHolder= new ViewHolder();
+                viewHolder.alarmSwitch = (Switch) convertView.findViewById(R.id.list_item_alarmSwitch);
+                viewHolder.alarmTime = (TextView) convertView.findViewById(R.id.list_item_alarmTime);
+                viewHolder.alarmSunday = (Button) convertView.findViewById(R.id.list_item_sunday);
+                viewHolder.alarmMonday = (Button) convertView.findViewById(R.id.list_item_monday);
+                viewHolder.alarmTuesday = (Button) convertView.findViewById(R.id.list_item_tuesday);
+                viewHolder.alarmWednesday = (Button) convertView.findViewById(R.id.list_item_wednesday);
+                viewHolder.alarmThursday = (Button) convertView.findViewById(R.id.list_item_thursday);
+                viewHolder.alarmFriday = (Button) convertView.findViewById(R.id.list_item_friday);
+                viewHolder.alarmSaturday = (Button) convertView.findViewById(R.id.list_item_saturday);
+                convertView.setTag(viewHolder);
+
+            } else {
+                mainViewHolder = (ViewHolder) convertView.getTag();
+                mainViewHolder.alarmTime.setText(getItem(position));
+            }
+            return convertView;
+        }
+    }
+
+
+    /****************THIS IS WHERE ALL THE ITEMS IN EACH LIST WILL GO ******/
+    public class ViewHolder{
+        Switch alarmSwitch;
+        TextView alarmTime;
+        Button alarmSunday;
+        Button alarmMonday;
+        Button alarmTuesday;
+        Button alarmWednesday;
+        Button alarmThursday;
+        Button alarmFriday;
+        Button alarmSaturday;
     }
 }
 

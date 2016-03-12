@@ -12,138 +12,25 @@
     tools:context="com.example.tony.alarmshame.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <AnalogClock
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/analogClock"
-        android:onClick="showTimePickerDialog"
-        android:layout_marginTop="24dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <ListView
+        android:id="@+id/listview"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
 
-    <DigitalClock
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/digitalClock"
-        android:textSize="50sp"
-        android:layout_centerVertical="true"
+    <Button
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:id="@+id/addAlarm"
+        android:background="@drawable/add_button"
+        android:text="+"
+        android:textSize="26dp"
+        android:textColor="@color/addButtonColor"
         android:layout_centerHorizontal="true"
-        android:onClick="showTimePickerDialog" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:onClick="showTimePickerDialog"/>
 
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alarm"
-        android:id="@+id/alarmSwitch"
-        android:checked="false"
-        android:layout_below="@+id/digitalClock"
-        android:layout_toRightOf="@+id/digitalClock"
-        android:layout_toEndOf="@+id/digitalClock"
-        android:layout_marginTop="63dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Time:"
-        android:id="@+id/textView"
-        android:layout_alignBaseline="@+id/alarmSwitch"
-        android:layout_alignBottom="@+id/alarmSwitch"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Time"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
-
-    <ToggleButton
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:text="New ToggleButton"
-        android:id="@+id/monday"
-        android:background="@drawable/round_button"
-        android:textOff="M"
-        android:textOn="M"
-        android:layout_gravity="bottom"
-        android:layout_below="@+id/textView2"
-        android:layout_toRightOf="@+id/sunday"
-        android:layout_toEndOf="@+id/sunday" />
-    <ToggleButton
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:text="New ToggleButton"
-        android:id="@+id/tuesday"
-        android:background="@drawable/round_button"
-        android:textOff="T"
-        android:textOn="T"
-        android:layout_gravity="bottom"
-        android:layout_alignTop="@+id/monday"
-        android:layout_toRightOf="@+id/monday"
-        android:layout_toEndOf="@+id/monday" />
-    <ToggleButton
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:text="New ToggleButton"
-        android:id="@+id/wednesday"
-        android:background="@drawable/round_button"
-        android:textOff="W"
-        android:textOn="W"
-        android:layout_gravity="bottom"
-        android:layout_alignTop="@+id/tuesday"
-        android:layout_toRightOf="@+id/tuesday"
-        android:layout_toEndOf="@+id/tuesday" />
-    <ToggleButton
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:text="New ToggleButton"
-        android:id="@+id/thursday"
-        android:background="@drawable/round_button"
-        android:textOff="TH"
-        android:textOn="TH"
-        android:layout_gravity="bottom"
-        android:layout_alignTop="@+id/wednesday"
-        android:layout_toRightOf="@+id/wednesday"
-        android:layout_toEndOf="@+id/wednesday" />
-    <ToggleButton
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:text="New ToggleButton"
-        android:id="@+id/friday"
-        android:background="@drawable/round_button"
-        android:textOff="F"
-        android:textOn="F"
-        android:layout_gravity="bottom"
-        android:layout_alignTop="@+id/thursday"
-        android:layout_toRightOf="@+id/thursday"
-        android:layout_toEndOf="@+id/thursday" />
-    <ToggleButton
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:text="New ToggleButton"
-        android:id="@+id/saturday"
-        android:background="@drawable/round_button"
-        android:textOff="S"
-        android:textOn="S"
-        android:layout_below="@+id/textView2"
-        android:layout_toRightOf="@+id/friday"
-        android:layout_toEndOf="@+id/friday"
-        android:layout_gravity="bottom" />
-    <ToggleButton
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:text="New ToggleButton"
-        android:id="@+id/sunday"
-        android:background="@drawable/round_button"
-        android:textOff="S"
-        android:textOn="S"
-        android:layout_gravity="bottom"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 </RelativeLayout>

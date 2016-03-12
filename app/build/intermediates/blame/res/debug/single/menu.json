@@ -1,6 +1,10 @@
 [
     {
-        "merged": "E:\\android\\AlarmShame-2.0\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_main.xml",
-        "source": "E:\\android\\AlarmShame-2.0\\app\\src\\main\\res\\menu\\menu_main.xml"
+        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\android\\AlarmShame-2.0\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_main.xml",
+        "source": "/home/tony/AndroidStudioProjects/AlarmShame/E:\\android\\AlarmShame-2.0\\app\\src\\main\\res\\menu\\menu_main.xml"
+    },
+    {
+        "merged": "/home/tony/AndroidStudioProjects/AlarmShame/app/build/intermediates/res/merged/debug/menu/menu_main.xml",
+        "source": "/home/tony/AndroidStudioProjects/AlarmShame/app/src/main/res/menu/menu_main.xml"
     }
 ]

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Time:"
+        android:textSize="35dp"
+        android:id="@+id/list_item_alarmTime"
+        android:layout_alignParentTop="true" />
+
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/list_item_sunday"
+        android:background="@drawable/round_button"
+        android:textOff="S"
+        android:textOn="S"
+        android:layout_below="@id/list_item_alarmTime"
+        />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/list_item_monday"
+        android:background="@drawable/round_button"
+        android:textOff="M"
+        android:textOn="M"
+        android:layout_toRightOf="@id/list_item_sunday"
+        android:layout_alignTop="@id/list_item_sunday"
+        />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/list_item_tuesday"
+        android:background="@drawable/round_button"
+        android:textOff="T"
+        android:textOn="T"
+        android:layout_toRightOf="@id/list_item_monday"
+        android:layout_alignTop="@id/list_item_sunday"
+        />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/list_item_wednesday"
+        android:background="@drawable/round_button"
+        android:textOff="T"
+        android:textOn="T"
+        android:layout_toRightOf="@id/list_item_tuesday"
+        android:layout_alignTop="@id/list_item_sunday"
+        />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/list_item_thursday"
+        android:background="@drawable/round_button"
+        android:textOff="T"
+        android:textOn="T"
+        android:layout_toRightOf="@id/list_item_wednesday"
+        android:layout_alignTop="@id/list_item_sunday"
+        />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/list_item_friday"
+        android:background="@drawable/round_button"
+        android:textOff="T"
+        android:textOn="T"
+        android:layout_toRightOf="@id/list_item_thursday"
+        android:layout_alignTop="@id/list_item_sunday"
+        />
+    <ToggleButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:text="New ToggleButton"
+        android:id="@+id/list_item_saturday"
+        android:background="@drawable/round_button"
+        android:textOff="T"
+        android:textOn="T"
+        android:layout_toRightOf="@id/list_item_friday"
+        android:layout_alignTop="@id/list_item_sunday"
+        />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_item_alarmSwitch"
+        android:checked="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/list_item_sunday"/>
+
+</RelativeLayout>
