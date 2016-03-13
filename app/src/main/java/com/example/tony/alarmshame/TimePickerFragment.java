@@ -1,49 +1,51 @@
 package com.example.tony.alarmshame;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.widget.AnalogClock;
+import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Gagan on 1/10/2016.
  */
-public class TimePickerFragment extends DialogFragment
-        implements TimePickerDialog.OnTimeSetListener {
+public class TimePickerFragment extends DialogFragment  {
 
-    int hour;
-    int minutes;
+    private Activity mActivity;
+    private TimePickerDialog.OnTimeSetListener mListener;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = activity;
+
+        // This error will remind you to implement an OnTimeSetListener
+        //   in your Activity if you forget
+        try {
+            mListener = (TimePickerDialog.OnTimeSetListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnTimeSetListener");
+        }
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
         final Calendar c = Calendar.getInstance();
-        hour = c.get(Calendar.HOUR_OF_DAY);
-        minutes = c.get(Calendar.MINUTE);
-
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
         // Create a new instance of TimePickerDialog and return it
-        return new TimePickerDialog(getActivity(), this, hour, minutes,false);
+        return new TimePickerDialog(mActivity, mListener, hour, minute,false);
                 //DateFormat.is24HourFormat(getActivity()));
     }
 
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        // Do something with the time chosen by the user
-        //Toast.makeText(getActivity(), "hi", Toast.LENGTH_SHORT).show();
-        hour = hourOfDay;
-        minutes = minute;
-        MainActivity.hour = hourOfDay;
-        MainActivity.minute = minute;
-        Toast.makeText(getActivity(), hourOfDay + " " + minute, Toast.LENGTH_SHORT).show();
-    }
-    public int getHour(){
-        return hour;
-    }
-    public int getMinute(){
-        return minutes;
-    }
+
 }

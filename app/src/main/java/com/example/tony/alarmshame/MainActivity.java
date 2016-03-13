@@ -3,12 +3,14 @@ package com.example.tony.alarmshame;
 import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
@@ -20,6 +22,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     static final int dialog_id = 0;
     static int hour,minute;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     TimePickerFragment newFragment;
 
     private ArrayList<String> data = new ArrayList<String>();
+    MyListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,25 +49,30 @@ public class MainActivity extends AppCompatActivity {
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         final ListView listView = (ListView) findViewById(R.id.listview);
-        generateListContent();
-        listView.setAdapter(new MyListAdapter(this, R.layout.alarm_list,data));
+        listAdapter = new MyListAdapter(this, R.layout.alarm_list,data);
+        listView.setAdapter(listAdapter);
 
         Button addAlarm = (Button) findViewById(R.id.addAlarm);
 
         addAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                data.add("what" + data.size());
-                listView.setAdapter(new MyListAdapter(getBaseContext(), R.layout.alarm_list, data));
+                showTimePickerDialog(v);
             }
         });
 
     }
 
-    private void generateListContent(){
-        for(int i = 0; i<1;i++){
-            data.add("what" + i);
-        }
+    public void showTimePickerDialog(View v) {
+        newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        // Do something with the time chosen by the user
+        data.add("what" + (hourOfDay+minute));
+        listAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -97,18 +106,8 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    public void showTimePickerDialog(View v) {
-        newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
-    }
 
-    public void setViewTime(int hour, int minute) {//},Activity act) {
-        //AnalogClock ac = new act.findViewById(R.id.analogClock);
-        //ac.set
-        Toast.makeText(getApplicationContext(), hour + ":" + minute, Toast.LENGTH_SHORT).show();
-    }
-
-    private class MyListAdapter extends ArrayAdapter<String>{
+    public class MyListAdapter extends ArrayAdapter<String>{
         private int layout;
         public MyListAdapter(Context context, int resource, List<String> objects) {
             super(context, resource, objects);

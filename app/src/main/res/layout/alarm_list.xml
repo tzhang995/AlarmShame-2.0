@@ -6,6 +6,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Time:"
         android:textSize="35dp"
@@ -21,6 +22,7 @@
         android:textOff="S"
         android:textOn="S"
         android:layout_below="@id/list_item_alarmTime"
+        android:layout_marginBottom="5dp"
         />
     <ToggleButton
         android:layout_width="60px"
@@ -50,8 +52,8 @@
         android:text="New ToggleButton"
         android:id="@+id/list_item_wednesday"
         android:background="@drawable/round_button"
-        android:textOff="T"
-        android:textOn="T"
+        android:textOff="W"
+        android:textOn="W"
         android:layout_toRightOf="@id/list_item_tuesday"
         android:layout_alignTop="@id/list_item_sunday"
         />
@@ -72,8 +74,8 @@
         android:text="New ToggleButton"
         android:id="@+id/list_item_friday"
         android:background="@drawable/round_button"
-        android:textOff="T"
-        android:textOn="T"
+        android:textOff="F"
+        android:textOn="F"
         android:layout_toRightOf="@id/list_item_thursday"
         android:layout_alignTop="@id/list_item_sunday"
         />
@@ -83,8 +85,8 @@
         android:text="New ToggleButton"
         android:id="@+id/list_item_saturday"
         android:background="@drawable/round_button"
-        android:textOff="T"
-        android:textOn="T"
+        android:textOff="S"
+        android:textOn="S"
         android:layout_toRightOf="@id/list_item_friday"
         android:layout_alignTop="@id/list_item_sunday"
         />
@@ -95,6 +97,17 @@
         android:id="@+id/list_item_alarmSwitch"
         android:checked="false"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/list_item_sunday"/>
+        android:layout_alignBottom="@id/list_item_sunday"/>
+
+    <Button
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:id="@+id/list_item_deleteButton"
+        android:background="@drawable/add_button"
+        android:text="-"
+        android:textSize="26dp"
+        android:textColor="@color/addButtonColor"
+        android:layout_alignTop="@id/list_item_alarmTime"
+        android:layout_alignRight="@id/list_item_alarmSwitch"/>
 
 </RelativeLayout>
