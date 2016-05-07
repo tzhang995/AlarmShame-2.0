@@ -70,9 +70,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        // Do something with the time chosen by the user
-        data.add("what" + (hourOfDay+minute));
-        listAdapter.notifyDataSetChanged();
+        if (!view.isShown()) {
+            // Do something with the time chosen by the user
+            data.add(hourOfDay + ":" + minute);
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
